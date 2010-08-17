@@ -1,0 +1,7 @@
+h1. Changelog
+
+h2. Version 0.0.1  (17/08/2010)
+
+* Clase Object
+* Clase Environment
+* Test unitario para la clase Object
