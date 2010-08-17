@@ -44,11 +44,7 @@ namespace fly\core;
  */
 class Environment
 {
-    static protected $configs = array(
-        'production' => array(),
-        'test' => array(),
-        'development' => array()
-    );
+    static protected $configs = array();
     
     static protected $currentEnvironmet = '';
     
@@ -60,11 +56,7 @@ class Environment
      */
     static public function reset()
     {
-        static::$configs = array(
-            'production' => array(),
-            'test' => array(),
-            'development' => array()
-        );
+        static::$configs = array();
         static::$currentEnvironmet = '';
         static::$detector = null;
     }
@@ -164,7 +156,7 @@ class Environment
      * 
      * @return bool
      */
-    static public function is($env)
+    static public function isEnv($env)
     {
         return (static::$currentEnvironmet === $env);
     }
