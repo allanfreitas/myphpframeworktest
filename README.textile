@@ -7,15 +7,35 @@ h2. Objetivo
 Los desarrollos webs tienen la caracteristica de poseer muchos requerimientos funcionales o asuntos secundarios que son transversales a todo el sistema. El Paradigma de Objetos (uno de lo mas utilizados por los frameworks de PHP) no permite una abstraccion para estos requerimientos dificultando el desarrollo.
 El objetivo del proyecto es investigar nuevas soluciones a estos problema extendiendo el Paradigma de Objetos utilizando otros paradigmas y coneceptos de la Ingenieria de Software.
 
+h2. Features
+
+* Implementación de objetos adaptativos y autoconfigurables en la instanciación
+
+h2. Pending
+
+* Autoload
+* Filtros de composicion
+* Implementación de Aspectos (POA)
+* Parser para Aspectos
+* Implementación de profiling con xhprof
+* Consola de Debug
+* Filtros para variables
+* Técnicas de persistencias de objetos, tanto en base de datos como en memoria
+* 
+
 h2. Instalación
 
 h2. Version
 
 * version 0.0.1 - 17/08/2010
 
+h2. Changelog
+
+Ver CHANGELOG.txt
+
 h2. Licencia
 
-Ver LICENCIA
+Ver LICENCE.txt
 
 h2. Docs
 
