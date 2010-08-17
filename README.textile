@@ -1,0 +1,33 @@
+h1. FlyPHP
+
+FlyPHP - Framework PHP 5.3+
+
+h2. Objetivo
+
+Los desarrollos webs tienen la caracteristica de poseer muchos requerimientos funcionales o asuntos secundarios que son transversales a todo el sistema. El Paradigma de Objetos (uno de lo mas utilizados por los frameworks de PHP) no permite una abstraccion para estos requerimientos dificultando el desarrollo.
+El objetivo del proyecto es investigar nuevas soluciones a estos problema extendiendo el Paradigma de Objetos utilizando otros paradigmas y coneceptos de la Ingenieria de Software.
+
+h2. Instalación
+
+h2. Version
+
+* version 0.0.1 - 17/08/2010
+
+h2. Licencia
+
+Ver LICENCIA
+
+h2. Docs
+
+Ver documentacion
+
+h2. Examples
+
+Ver Examples
+
+h2. Contacto
+
+Federico Lozada Mosto
+Email: mostofreddy@gmail.com
+Blog: "linktext":http://www.mostofreddy.com.ar
+Twitter: "linktext":http://www.twitter.com/mostofreddy 
