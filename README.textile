@@ -49,5 +49,5 @@ h2. Contacto
 
 Federico Lozada Mosto
 Email: mostofreddy@gmail.com
-Blog: "linktext":http://www.mostofreddy.com.ar
-Twitter: "linktext":http://www.twitter.com/mostofreddy 
+Blog: "mostofreddy":http://www.mostofreddy.com.ar
+Twitter: "@mostofreddy":http://www.twitter.com/mostofreddy 
