@@ -13,7 +13,7 @@ h2. Features
 
 h2. Pending
 
-* Autoload
+* -Autoload-
 * Filtros de composicion
 * Implementación de Aspectos (POA)
 * Parser para Aspectos
@@ -21,17 +21,16 @@ h2. Pending
 * Consola de Debug
 * Filtros para variables
 * Técnicas de persistencias de objetos, tanto en base de datos como en memoria
-* 
 
 h2. Instalación
 
 h2. Version
 
-* version 0.0.1 - 17/08/2010
+* version 0.0.2 - 01/09/2010
 
 h2. Changelog
 
-Ver CHANGELOG.txt
+Ver CHANGELOG.textile
 
 h2. Licencia
 
@@ -43,7 +42,7 @@ Ver documentacion
 
 h2. Examples
 
-Ver Examples
+Ver carpeta examples
 
 h2. Contacto
 
