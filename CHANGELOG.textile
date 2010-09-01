@@ -1,5 +1,11 @@
 h1. Changelog
 
+h2. Version 0.0.2  (01/09/2010)
+
+* Clase para handler de errores y exception
+* Clase autoload y para cargar archivos
+* Test para handler
+
 h2. Version 0.0.1  (17/08/2010)
 
 * Clase Object

@@ -51,7 +51,7 @@ abstract class Object
      * Almacena la configuración del objeto en tiempo de ejecucion
      * @var array
      */
-    public $config = array();
+    protected $config = array();
     /**
      * Contiene los nombres de los atributos que machearan con la configuracion al instanciar el objeto. Cada elemento de este array
      * debera ser el nombre de un atributo de la clase. Tambien puede ser que la clave del array sea el nombre del atributo y tenga como 

@@ -1,6 +1,6 @@
 <?php
 /**
- * ObjectTest
+ * ErrorTest
  *  
  * PHP version 5.3
  * 
@@ -27,10 +27,10 @@
  * @link       http://www.mostofreddy.com.ar
  */
 namespace fly\tests;
-require_once '/home/freddy/public_html/fly/core/Object.php';
-require_once '/home/freddy/public_html/fly/tests/mocks/ObjectMock.php';
+use \fly\core\Error;
+require_once '/home/freddy/public_html/fly/core/Error.php';
 /**
- * ObjectTest
+ * ErrorTest
  * 
  * @category   Tests
  * @package    Fly
@@ -41,36 +41,56 @@ require_once '/home/freddy/public_html/fly/tests/mocks/ObjectMock.php';
  * @version    Release: @package_version@
  * @link       http://www.mostofreddy.com.ar
  */
-class ObjectTest extends \PHPUnit_Framework_TestCase
+ class ErrorTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Testea instanciar un objeto
-     * 
-     * @return void
-     */
-    public function testInitWhitOutConfig()
-    {
-        $mock = new \fly\tests\mocks\ObjectMock();
-        $this->assertEquals(1, count($mock->getConfig()));
-    }
-    /**
-     * Testea instanciar un objeto pasandole como parametro la configuracion
-     * 
-     * @return void
-     */
-    public function testInitWhitConfig()
-    {
-        $mock = new \fly\tests\mocks\ObjectMock(array('saludo'=>'buen dia'));
-        $this->assertEquals('buen dia', $mock->getConfig('saludo'));
-    }
-    /**
-     * Testea  instaciar un objeto pasandole como parametros la configuracion y la configuración de los atributos
-     * 
-     * @return void
-     */
-    public function testInitWhitConfigAttr()
-    {
-        $mock = new \fly\tests\mocks\ObjectMock(array('saludo'=>'buen dia','attr1'=>'atributo1'));
-        $this->assertEquals('atributo1', $mock->getAttr1());
-    }
+	public function setUp() {
+		Error::run();
+		Error::reset();		
+	}
+
+	public function tearDown() {
+		Error::stop();		
+	}
+	
+	public function testExceptionCatching()
+	{
+		$e = array();
+		Error::setConfig(array(
+			array(
+				'handler' => function($info) use (&$e) {
+					$e = $info;
+				}
+			)
+		));
+		
+		Error::handle(new \Exception('Testeando handlers'));
+		
+		$this->assertEquals(2, count($e));
+		
+		$this->assertEquals('Testeando handlers', $e['origin']['message']);
+	}
+	
+	public function testErrorCatching()
+	{
+		$e = array();
+		Error::setConfig(array(
+			array(
+				'code' => E_WARNING,
+				'handler' => function($info) use (&$e) {
+					$e = $info;
+				}
+			)
+		));
+		
+		@file_get_contents(false);
+		
+		$this->assertEquals(2, count($e));
+		
+		$this->assertEquals('file_get_contents(): Filename cannot be empty', $e['origin']['message']);
+		
+		$r = 5/0;
+		
+		$this->assertEquals(2, count($e));
+		$this->assertEquals('Division by zero', $e['origin']['message']);
+	}
 }
