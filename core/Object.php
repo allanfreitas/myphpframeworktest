@@ -33,7 +33,6 @@ namespace fly\core;
  * Clase base para todos los objetos del framework.
  * Brinda un constructor general que permite configurar al objeto en el momento de la instanciación, logrando que los objetos se adapten
  * (programación adaptativa) al entorno en el cual se instancian 
- * 
  *  
  * @category   Core
  * @package    Fly
@@ -73,34 +72,34 @@ abstract class Object
      */
     public function __construct(array $config = array())
     {
-		$defaults = array('init' => true);
+        $defaults = array('init' => true);
         $this->config = $config + $defaults;
         if ($this->config['init']) {
             $this->init();
         }
-	}
-	/**
-	 * Inicializa al objeto.
-	 * 
-	 * Itera sobre configAttr para asignar los valores de configuracion a los atributos correspondientes
-	 * 
-	 * @return void
-	 * @final
-	 * @see Object::$configAttr
-	 */
-	final protected function init()
-	{   
-	    foreach ($this->configAttr as $k => $v) {
-			if (!isset($this->config[$k]) && !isset($this->config[$v])) {
-				continue;
-			}
-			if ($v === 'mergeAll') {
-				$this->$k = $this->config[$k] + $this->$k;
-				unset($this->config[$k]);
-			} else {
-				$this->$v = $this->config[$v];
-				unset($this->config[$v]);
-			}
-		}
-	}
+    }
+    /**
+     * Inicializa al objeto.
+     * 
+     * Itera sobre configAttr para asignar los valores de configuracion a los atributos correspondientes
+     * 
+     * @return void
+     * @final
+     * @see Object::$configAttr
+     */
+    final protected function init()
+    {   
+        foreach ($this->configAttr as $k => $v) {
+            if (!isset($this->config[$k]) && !isset($this->config[$v])) {
+                continue;
+            }
+            if ($v === 'mergeAll') {
+                $this->$k = $this->config[$k] + $this->$k;
+                unset($this->config[$k]);
+            } else {
+                $this->$v = $this->config[$v];
+                unset($this->config[$v]);
+            }
+        }
+    }
 }

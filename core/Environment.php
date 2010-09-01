@@ -132,7 +132,8 @@ class Environment
      */
     static public function detector()
     {
-        return static::$detector?:function ($env) {
+        return static::$detector?:function ($env)
+        {
             return 'development';
         };
     }
