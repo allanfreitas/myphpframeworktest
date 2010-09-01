@@ -1,10 +1,10 @@
 
 [indentation]
 indent_width=4
-indent_type=1
+indent_type=0
 indent_hard_tab_width=8
 detect_indent=false
-indent_mode=2
+indent_mode=1
 
 [project]
 name=FlyPHP
