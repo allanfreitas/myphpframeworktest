@@ -14,6 +14,7 @@ h2. Features
 h2. Pending
 
 * -Autoload-
+* -Manejador de errores y excepciones-
 * Filtros de composicion
 * Implementación de Aspectos (POA)
 * Parser para Aspectos
