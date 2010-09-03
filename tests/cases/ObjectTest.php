@@ -28,7 +28,7 @@
  */
 namespace fly\tests;
 require_once '/home/freddy/public_html/fly/core/Object.php';
-require_once '/home/freddy/public_html/fly/tests/mocks/ObjectMock.php';
+require_once '/home/freddy/public_html/fly/tests/cases/mocks/ObjectMock.php';
 /**
  * ObjectTest
  * 
