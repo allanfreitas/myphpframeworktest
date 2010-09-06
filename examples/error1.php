@@ -12,24 +12,37 @@ $code = (E_ERROR | E_USER_WARNING | E_COMPILE_WARNING);
 
 
 if ($code & 0) {
-	echo "ok";
+    echo "ok";
 } else {
-	echo "nok";
+    echo "nok";
 }
 
 echo "<br/><br/>";
 
+class e
+{
+    public function err($info)
+    {
+        print_r($info['origin']);
+    }
+}
+
+$rr = new e();
 
 $errores = array();
 $r = array(
-	0 => array(
-		'code' => E_ERROR,
-		'handler' => function($info) { echo "buuu<br/>"; }
-		),
-	1 => array(
-		//'code' => 0,
-		'handler' => function($info) use (&$errores) { echo $info['origin']['message']; }
-		)
+    0 => array(
+        'code' => E_ERROR,
+        'handler' => function($info) { echo "buuu<br/>"; }
+        ),
+    1 => array(
+        'code' => 0,
+        'handler' => function($info) use (&$errores) { echo print_r($info['origin']); }
+        ),
+    2 => array(
+        //'code' => 0,
+        'handler' => array($rr,'err')
+        )
 );
 
 
@@ -39,16 +52,16 @@ C\Error::run();
 
 function foo()
 {
-//$r = 9/0;
+$r = 9/0;
 //throw new Exception('holaaaaaaaaaaaaaaaaaaaaa');
 }
 
 class bar
 {
-	static function foo()
-	{
-		foo();
-	}
+    static function foo()
+    {
+        foo();
+    }
 }
 
 bar::foo();
