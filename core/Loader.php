@@ -63,27 +63,15 @@ class Loader
         }
     }
     /**
-     * Invoca a todas las funcionas registradas en el autolad para cargar la clase invocada
-     * 
-     * @param string $name nombre de la clase o nombre del archivo a cargar
-     * 
-     * @return void
-     * @static
-     */
-    static protected function call($name)
-    {
-        spl_autoload_call($name);
-    }    
-    /**
      * Regisrta una nueva funcion para la implementacion de auntolad
-     * 
+     *
      * @param callback $callback funcion que es llamada por el autolad para la carga de archivos, puede ser:
      *                            - un closure
      *                            - un metodo estatic (NombreClase::nombreFunc)
      *                            - un metodo de una instancia (array($instancia,'nombreMetodo'))
      * @param bool     $throw    indica si spl_autoload_register genera un error una execpcion
      * @param bool     $prepend  If true, spl_autoload_register() will prepend the autoloader on the autoload stack instead of appending it
-     * 
+     *
      * @return bool
      * @static
      */
@@ -93,19 +81,19 @@ class Loader
     }
     /**
      * Quita una funcion del registro del autolad
-     * 
+     *
      * @param callback $callback funcion que es llamada por el autolad para la carga de archivos
-     * 
+     *
      * @return bool
      * @static
      */
     static public function unregister($callback)
     {
         return spl_autoload_unregister($callback);
-    }   
+    }
     /**
      * Inicializa el autoload registrando todas las funciones pasadas + la default
-     * 
+     *
      * @param array $functToAutolad array con las funciones a invocar por el autolaod
      *                              pueden ser un closure, un metodo estatico o un metodo de una instancia
      *                              array(
@@ -113,7 +101,7 @@ class Loader
      *                                  1 => 'NombreClaseEstatica::nombreMetodoEstatico'
      *                                  2 => array($instancia,'nombreMetodod')
      *                              )
-     * 
+     *
      * @return void
      * @static
      */
@@ -126,19 +114,19 @@ class Loader
     }
     /**
      * Reaiza un include del archivo invocado
-     * 
+     *
      * @param string $fileName nombre del archivo a incluir
-     * 
+     *
      * @return void
      * @static
      */
     static public function load($fileName)
     {
-        static::call($fileName);
+        spl_autoload_call($name);
     }
     /**
      * Funcion autoload por default
-     * 
+     *
      * @return closure
      * @static
      */
@@ -155,5 +143,5 @@ class Loader
                 }
             }
         };
-    }    
+    }
 }
