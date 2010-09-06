@@ -5,6 +5,7 @@ h2. Version 0.0.2  (01/09/2010)
 * Manejador de errores y excepciones
 * Autoload
 * Test para handler
+* Code Coverage para testing
 
 h2. Version 0.0.1  (17/08/2010)
 
