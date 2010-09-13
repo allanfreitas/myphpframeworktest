@@ -31,7 +31,7 @@ namespace fly\core;
  * Manejador de errores y exepciones.
  * Setea los handles para manejar de igual forma los errores y los handlers, para ello transforma los errores en exepciones del tipo
  * ErrorException
- * 
+ *
  * @category   Core
  * @package    Fly
  * @subpackage Core
@@ -74,8 +74,8 @@ class Error
     static protected $config = array();
     /**
      * Configura como se actuara al capturar un error/exepcion
-     * 
-     * @param array $config array donde code indica el nivel de error para el cual se setea el handle, 
+     *
+     * @param array $config array donde code indica el nivel de error para el cual se setea el handle,
      *                      sino se define code entonces es para para todos los niveles de error
      *                      array(
      *                          0 => array(
@@ -83,7 +83,7 @@ class Error
      *                              'handler' => function ($info) { //..} //accion a realizar
      *                          )
      *                      )
-     * 
+     *
      * @return void
      * @static
      */
@@ -97,7 +97,7 @@ class Error
     }
     /**
      * Inicializa los handler
-     * 
+     *
      * @return void
      * @static
      */
@@ -111,7 +111,7 @@ class Error
                 $self::handle($exception);
             }
         );
-        
+
         set_error_handler(
             function($code, $message, $file, $line = 0, $context = null) use ($self)
             {
@@ -122,9 +122,9 @@ class Error
     }
     /**
      * Lógica para tratar los errores.
-     * 
+     *
      * @param \Exception $exception excepcion generada
-     * 
+     *
      * @return void
      * @static
      */
@@ -137,18 +137,48 @@ class Error
         //recorre todas los handler definidos para tratar la excepcion
         foreach (static::$config as $conf) {
             if (is_array($conf) && isset($conf['handler'])) {
-                if (!isset($conf['code']) || (isset($conf['code']) && $conf['code'] & $info['origin']['code'])) {
-                    $conf['handler']($info);
+                if (static::validCodeHandle($conf['code'], $info['origin']['code'])) {
+                    static::invokeHandler($conf['handler'], $info);
                 }
             }
         }
         return true;
     }
     /**
+     * Valida si el codigo de validacion del handler es = que el del error producido, si es asi, entonces invoca al handler
+     *
+     * @param int $codeHandler Codigo de error para el cual el handler se tiene que invocar
+     * @param int $codeError   Codigo de error producido
+     *
+     * @return bool
+     * @static
+     */
+    static protected function validCodeHandle($codeHandler, $codeError)
+    {
+        return (!isset($codeHandler) || (isset($codeHandler) && $codeHandler & $codeError));
+    }
+    /**
+     * Invoca a un handler
+     *
+     * @param mixed &$handler handler a invocar para que procese el error
+     * @param array &$info    array con la información del error producido
+     *
+     * @return void
+     * @static
+     */
+    static protected function invokeHandler(&$handler, &$info)
+    {
+        if (is_array($handler) && is_callable($handler)) {
+            $handler[0]->$handler[1]($info);
+        } elseif (is_callable($handler)) {
+            $handler($info);
+        }
+    }
+    /**
      * Recupera y devuelve los datos originales de donde se genero el error
-     * 
+     *
      * @param \Exception $exception excepcion generada
-     * 
+     *
      * @return array array(
      *                  'message' => $exception->getMessage(),
      *                  'code' => $exception->getCode(),
@@ -174,9 +204,9 @@ class Error
     }
     /**
      * Devuelve el trace del error
-     * 
+     *
      * @param array $trace trace del error (\Exception::getTrace())
-     * 
+     *
      * @return array
      * @static
      */
@@ -185,21 +215,21 @@ class Error
         return array_map(
             function ($frame)
             {
-                if (isset($frame['function'])) {                
+                if (isset($frame['function'])) {
                     if (isset($frame['class'])) {
                             $frame['function'] = trim($frame['class'], '\\') . '::' . $frame['function'];
                             unset($frame['class']);
                             unset($frame['type']);
                     }
                         return $frame;
-                }   
+                }
             },
             $trace
         );
     }
     /**
      * Restituye los handler de errr y excepcion originales
-     * 
+     *
      * @return void
      * @static
      */
@@ -211,7 +241,7 @@ class Error
     }
     /**
      * Resetela configuracion del handler
-     * 
+     *
      * @return void
      * @static
      */
