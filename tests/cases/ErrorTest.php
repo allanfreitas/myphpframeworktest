@@ -44,8 +44,7 @@ use \fly\core\Error;
 {
 	static public $errors = array();
     
-    static public function setUpBeforeClass() {
-		Error::run();
+    static public function setUpBeforeClass() {		
         Error::config(array(
 			array(
 				'handler' => function($info){
@@ -53,6 +52,7 @@ use \fly\core\Error;
 				}
 			)
 		));
+        Error::run();
 	}
 
 	static public function tearDownAfterClass() {
@@ -73,9 +73,9 @@ use \fly\core\Error;
 	{
 		$e = array();
 		Error::handle(new \Exception('Testeando handlers'));
-		$this->assertEquals('Testeando handlers', ErrorTest::$errors[0]['origin']['message']);
+        $this->assertEquals('Testeando handlers', ErrorTest::$errors[0]['origin']['message']);
 	}
-    	
+    
 	public function testErrorCatching()
 	{
 		@file_get_contents(false);
