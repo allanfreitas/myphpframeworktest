@@ -94,7 +94,7 @@ abstract class Object
                 continue;
             }
             if ($v === 'mergeAll') {
-                $this->$k = $this->config[$k] + $this->$k;
+                $this->$k = array_merge((array) $this->config[$k], $this->$k);
                 unset($this->config[$k]);
             } else {
                 $this->$v = $this->config[$v];

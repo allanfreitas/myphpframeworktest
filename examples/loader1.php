@@ -4,7 +4,7 @@ require_once '../core/Loader.php';
 $p  = dirname(__FILE__).'/../../';
 
 use fly\core as C;
-use fly\tests\mocks as M;
+use fly\tests\cases\mocks as M;
 
 
 class Loadingg 
@@ -17,6 +17,7 @@ class Loadingg
 		);
 		foreach ($paths as $path) {
 			$file = $path.str_replace('\\', '/', $className).'.php';
+            echo '---'.$file.'--';
 			if (file_exists($file) && is_file($file)) {
 				include_once $file;
 				return true;

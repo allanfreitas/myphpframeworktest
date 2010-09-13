@@ -26,9 +26,9 @@
  * @version    SVN: $Id$
  * @link       http://www.mostofreddy.com.ar
  */
-namespace fly\tests;
-require_once '/home/freddy/public_html/fly/core/Object.php';
-require_once '/home/freddy/public_html/fly/tests/cases/mocks/ObjectMock.php';
+namespace fly\tests\cases;
+//require_once '/home/freddy/public_html/fly/core/Object.php';
+//require_once '/home/freddy/public_html/fly/tests/cases/mocks/ObjectMock.php';
 /**
  * ObjectTest
  * 
@@ -50,7 +50,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
      */
     public function testInitWhitOutConfig()
     {
-        $mock = new \fly\tests\mocks\ObjectMock();
+        $mock = new \fly\tests\cases\mocks\ObjectMock();
         $this->assertEquals(1, count($mock->getConfig()));
     }
     /**
@@ -60,7 +60,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
      */
     public function testInitWhitConfig()
     {
-        $mock = new \fly\tests\mocks\ObjectMock(array('saludo'=>'buen dia'));
+        $mock = new \fly\tests\cases\mocks\ObjectMock(array('saludo'=>'buen dia'));
         $this->assertEquals('buen dia', $mock->getConfig('saludo'));
     }
     /**
@@ -70,7 +70,18 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
      */
     public function testInitWhitConfigAttr()
     {
-        $mock = new \fly\tests\mocks\ObjectMock(array('saludo'=>'buen dia','attr1'=>'atributo1'));
-        $this->assertEquals('atributo1', $mock->getAttr1());
+        $mock = new \fly\tests\cases\mocks\ObjectMock(array('saludo'=>'buen dia','attr1'=>'atributo1'));
+        $this->assertEquals('atributo1', $mock->attr1);
+    }
+    
+    public function testInitWhitConfigAttrMergeAll()
+    {
+        $config = array(
+            'saludo'=>'buen dia',
+            'attr1'=>'atributo1',
+            'attr2'=>array('testInitWhitConfigAttrMergeAll')
+        );
+        $mock = new \fly\tests\cases\mocks\ObjectMock($config);
+        $this->assertEquals(2, count($mock->attr2));
     }
 }

@@ -28,7 +28,7 @@ $r = array(
 		),
 	1 => array(
 		//'code' => 0,
-		'handler' => function($info) use (&$errores) { echo $info['origin']['message']; }
+		'handler' => function($info) use (&$errores) { echo 'mensaje: '.$info['origin']['message']; }
 		)
 );
 
@@ -53,7 +53,10 @@ class bar
 
 bar::foo();
 //strpos();
-file_get_contents(false);
+//file_get_contents(false);
+
+
+throw new \Exception('Uncaught Exception');
 
 
 echo "fin";

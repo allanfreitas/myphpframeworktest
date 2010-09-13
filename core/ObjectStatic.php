@@ -1,6 +1,6 @@
 <?php
 /**
- * ObjectMock
+ * ObjectStatic
  *  
  * PHP version 5.3
  * 
@@ -17,59 +17,31 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- * @category   Tests
+ * @category   Core
  * @package    Fly
- * @subpackage Tests/Mocks
+ * @subpackage Core
  * @author     Federico Lozada Mosto <mostofreddy@gmail.com>
  * @copyright  2010 Federico Lozada Mosto <mostofreddy@gmail.com>
  * @license    http://www.opensource.org/licenses/gpl-2.0.php  GNU General Public License (GPL)
  * @version    SVN: $Id$
  * @link       http://www.mostofreddy.com.ar
  */
-namespace fly\tests\cases\mocks;
+namespace fly\core;
 /**
- * ObjectMock
- * 
- * @category   Tests
+ * ObjectStatic
+ *  
+ * @category   Core
  * @package    Fly
- * @subpackage Tests/Mocks
+ * @subpackage Core
  * @author     Federico Lozada Mosto <mostofreddy@gmail.com>
  * @copyright  2010 Federico Lozada Mosto <mostofreddy@gmail.com>
  * @license    http://www.opensource.org/licenses/gpl-2.0.php  GNU General Public License (GPL)
  * @version    Release: @package_version@
  * @link       http://www.mostofreddy.com.ar
  * @abstract
+ * @static
  */
-class ObjectMock extends \fly\core\Object
+abstract class ObjectStatic
 {
-    protected $attr1;
-    protected $attr2 = array('ObjectMock');
-    protected $configAttr = array(
-        'attr1',
-        'attr2' => 'mergeAll'
-        );
-    /**
-     * Devuelve un valor de configuracion
-     * 
-     * @param mixed $nameConfig puede tomar varios valores
-     *                          - null: devuelve el array de condfiguracion entero
-     *                          - string: indica el nombre de una clave de configuración
-     *                          
-     * @return mixed
-     */
-    public function getConfig($nameConfig = null)
-    {
-        if (is_null($nameConfig)) {
-            return $this->config;
-        } elseif (isset($this->config[$nameConfig])) {
-            return $this->config[$nameConfig];
-        } else {
-            return null;
-        }
-    }
     
-    public function __get($var)
-    {
-        return $this->$var;
-    }
 }

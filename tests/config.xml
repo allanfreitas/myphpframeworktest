@@ -1,0 +1,11 @@
+<phpunit bootstrap="bootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="FlyPHP">
+            <file>cases/ErrorTest.php</file>
+            <file>cases/ObjectTest.php</file>
+        </testsuite>
+    </testsuites>
+    <logging>
+        <log type="coverage-html" target="coverage" charset="UTF-8" yui="true" highlight="false" lowUpperBound="35" highLowerBound="70"/>        
+    </logging>
+</phpunit>

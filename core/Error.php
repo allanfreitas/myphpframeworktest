@@ -44,6 +44,30 @@ namespace fly\core;
 class Error
 {
     /**
+     * Indica si se esta capturando los errores o no
+     * @var bool
+     */
+    static public $isRunning = false;
+    
+    static protected $codeError = array(
+        1 => 'E_ERROR',
+        2 => 'E_WARNING',
+        4 => 'E_PARSE',
+        8 => 'E_NOTICE',
+        16 => 'vCORE_ERROR',
+        32 => 'E_CORE_WARNING',
+        64 => 'E_COMPILE_ERROR ',
+        128 => 'E_COMPILE_WARNING',
+        256 => 'E_USER_ERROR',
+        512 => 'E_USER_WARNING ',
+        1024 => 'E_USER_NOTICE',
+        2048 => 'E_STRICT',
+        4096 => 'E_RECOVERABLE_ERROR',
+        8192 => 'E_DEPRECATED',
+        16384 => 'E_USER_DEPRECATED',
+        30719 => 'E_ALL'
+    );
+    /**
      * Configuracion de los handlers
      * @var array
      */
@@ -63,9 +87,13 @@ class Error
      * @return void
      * @static
      */
-    static public function setConfig(array $config)
+    static public function config($config = null)
     {
-        static::$config = array_merge($config, static::$config);
+        if (!is_null($config)) {
+            echo "entre";
+            static::$config = array_merge((array) $config, static::$config);
+        }
+        return static::$config;
     }
     /**
      * Inicializa los handler
@@ -90,6 +118,7 @@ class Error
                 $self::handle(new \ErrorException($message, $code, $code, $file, $line));
             }
         );
+        static::$isRunning = true;
     }
     /**
      * Lógica para tratar los errores.
@@ -133,9 +162,15 @@ class Error
         return array(
             'message' => $exception->getMessage(),
             'code' => $exception->getCode(),
+            'codeName' => static::getCodeName($exception->getCode()),
             'file' => $exception->getFile(),
             'line' => $exception->getLine()
         );
+    }
+    
+    static protected function getCodeName($code)
+    {
+        return isset(static::$codeError[$code])?static::$codeError[$code]:'n/a';
     }
     /**
      * Devuelve el trace del error
@@ -172,6 +207,7 @@ class Error
     {
         restore_error_handler();
         restore_exception_handler();
+        static::$isRunning = false;
     }
     /**
      * Resetela configuracion del handler

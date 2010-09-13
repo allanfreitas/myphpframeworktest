@@ -26,9 +26,8 @@
  * @version    SVN: $Id$
  * @link       http://www.mostofreddy.com.ar
  */
-namespace fly\tests;
+namespace fly\tests\cases;
 use \fly\core\Error;
-require_once '/home/freddy/public_html/fly/core/Error.php';
 /**
  * ErrorTest
  * 
@@ -43,54 +42,61 @@ require_once '/home/freddy/public_html/fly/core/Error.php';
  */
  class ErrorTest extends \PHPUnit_Framework_TestCase
 {
-	public function setUp() {
+	static public $errors = array();
+    
+    static public function setUpBeforeClass() {
 		Error::run();
-		Error::reset();		
+        Error::config(array(
+			array(
+				'handler' => function($info){
+					ErrorTest::$errors[] = $info;
+				}
+			)
+		));
 	}
 
-	public function tearDown() {
+	static public function tearDownAfterClass() {
 		Error::stop();		
 	}
-	
+    
+    protected function setUp()
+    {
+        ErrorTest::$errors = array();
+    }
+    
+    public function testIsRunning()
+    {
+        $this->assertTrue(Error::$isRunning);
+    }
+    
 	public function testExceptionCatching()
 	{
 		$e = array();
-		Error::setConfig(array(
-			array(
-				'handler' => function($info) use (&$e) {
-					$e = $info;
-				}
-			)
-		));
-		
 		Error::handle(new \Exception('Testeando handlers'));
-		
-		$this->assertEquals(2, count($e));
-		
-		$this->assertEquals('Testeando handlers', $e['origin']['message']);
+		$this->assertEquals('Testeando handlers', ErrorTest::$errors[0]['origin']['message']);
 	}
-	
+    	
 	public function testErrorCatching()
 	{
-		$e = array();
-		Error::setConfig(array(
-			array(
-				'code' => E_WARNING,
-				'handler' => function($info) use (&$e) {
-					$e = $info;
-				}
-			)
-		));
-		
 		@file_get_contents(false);
-		
-		$this->assertEquals(2, count($e));
-		
-		$this->assertEquals('file_get_contents(): Filename cannot be empty', $e['origin']['message']);
-		
-		$r = 5/0;
-		
-		$this->assertEquals(2, count($e));
-		$this->assertEquals('Division by zero', $e['origin']['message']);
+		$this->assertEquals('file_get_contents(): Filename cannot be empty', ErrorTest::$errors[0]['origin']['message']);
 	}
+    
+    public function testCodeName()
+	{
+		@file_get_contents(false);
+        $this->assertEquals('E_WARNING', ErrorTest::$errors[0]['origin']['codeName']);
+	}
+    
+    public function testReset()
+    {
+        Error::reset();
+        $this->assertEquals(0,count(Error::config()));
+    }
+    
+    public function testStop()
+    {
+        Error::stop();
+        $this->assertFalse(Error::$isRunning);
+    }
 }

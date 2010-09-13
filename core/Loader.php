@@ -63,18 +63,6 @@ class Loader
         }
     }
     /**
-     * Invoca a todas las funcionas registradas en el autolad para cargar la clase invocada
-     * 
-     * @param string $name nombre de la clase o nombre del archivo a cargar
-     * 
-     * @return void
-     * @static
-     */
-    static protected function call($name)
-    {
-        spl_autoload_call($name);
-    }    
-    /**
      * Regisrta una nueva funcion para la implementacion de auntolad
      * 
      * @param callback $callback funcion que es llamada por el autolad para la carga de archivos, puede ser:
@@ -134,7 +122,7 @@ class Loader
      */
     static public function load($fileName)
     {
-        static::call($fileName);
+        spl_autoload_call($fileName);
     }
     /**
      * Funcion autoload por default
@@ -155,5 +143,5 @@ class Loader
                 }
             }
         };
-    }    
+    }
 }
