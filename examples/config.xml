@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <default>
+        <cache>
+            <adapter>Memcache</adapter>
+            <time>3</time>
+            <tunit>h</tunit>
+        </cache>
+        <persist>
+            <adapter>Mysql</adapter>
+            <dataCon>
+                <user>root</user>
+                <pass>123</pass>
+                <host>localhost</host>
+                <db>test</db>
+            </dataCon>
+        </persist>
+    </default>    
+    <production>
+    </production>    
+    <development>
+        <cache>
+            <adapter>File</adapter>
+            <time>5</time>
+            <tunit>m</tunit>
+        </cache>
+    </development>	
+</configuration>

@@ -90,7 +90,6 @@ class Error
     static public function config($config = null)
     {
         if (!is_null($config)) {
-            echo "entre";
             static::$config = array_merge((array) $config, static::$config);
         }
         return static::$config;
@@ -137,7 +136,7 @@ class Error
         //recorre todas los handler definidos para tratar la excepcion
         foreach (static::$config as $conf) {
             if (is_array($conf) && isset($conf['handler'])) {
-                if (static::validCodeHandle($conf['code'], $info['origin']['code'])) {
+                if (static::validCodeHandle($conf, $info['origin']['code'])) {
                     static::invokeHandler($conf['handler'], $info);
                 }
             }
@@ -153,9 +152,9 @@ class Error
      * @return bool
      * @static
      */
-    static protected function validCodeHandle($codeHandler, $codeError)
+    static protected function validCodeHandle(&$codeHandler, $codeError)
     {
-        return (!isset($codeHandler) || (isset($codeHandler) && $codeHandler & $codeError));
+        return (!isset($codeHandler['code']) || (isset($codeHandler['code']) && $codeHandler['code'] & $codeError));
     }
     /**
      * Invoca a un handler
