@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <default>
-        <cache>
+    <default f="f">
+        <cache a="a" b="b">
             <adapter>Memcache</adapter>
             <time>3</time>
             <tunit>h</tunit>
+            <htunit>hs</htunit>
         </cache>
         <persist>
             <adapter>Mysql</adapter>
@@ -18,8 +19,8 @@
     </default>    
     <production>
     </production>    
-    <development>
-        <cache>
+    <development d="d" f="ff">
+        <cache c="c">
             <adapter>File</adapter>
             <time>5</time>
             <tunit>m</tunit>

@@ -45,7 +45,12 @@ class Config
         //config para el ambiente acutal
         $env = $xml->xpath('/configuration/'.Environment::get());
         //realizo un merge donde los datos del ambiente no son sobreescritos x los default
-        Help\SXml::plus($env[0], $default[0]);
+        Help\SXml::merge($env[0], $default[0]);
         static::$config = static::getConfig($env[0]);
+        ?>
+        <pre>
+        <?php print_r(static::$config);?>
+        </pre>
+        <?php
     }
 }
