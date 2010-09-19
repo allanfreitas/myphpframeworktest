@@ -10,6 +10,7 @@ El objetivo del proyecto es investigar nuevas soluciones a estos problema extend
 h2. Features
 
 * Implementación de objetos adaptativos y autoconfigurables en la instanciación
+* Configuracion automatica para todos los ambientes
 
 h2. Pending
 
