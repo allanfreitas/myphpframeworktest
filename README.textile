@@ -1,6 +1,6 @@
-h1. FlyPHP
+h1. FxPHP
 
-FlyPHP - Framework PHP 5.3+
+FXPHP - Framework PHP 5.3+
 
 h2. Objetivo
 
